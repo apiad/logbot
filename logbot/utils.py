@@ -14,7 +14,10 @@ def ask(token, msg, *actions, host="http://localhost", port=6778):
         actions=list(actions)
     ))
 
-    return response.json()['response']
+    try:
+        return response.json()['response']
+    except:
+        return None
 
 def yes(token, msg, host="http://localhost", port=6778):
     response = requests.post("%s:%d" % (host,port), json=dict(
