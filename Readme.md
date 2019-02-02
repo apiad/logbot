@@ -2,6 +2,10 @@
 
 > A Telegram bot that you can log to from Python and manage long running processes.
 
+```
+pip install logbot-telegram
+```
+
 ## Quickstart
 
 > **NOTE:** The following example is using a _demo_ bot that I personally host at [apiad.net:6778](http://apiad.net:6778). This bot can and will be stopped, restarted or even destroyed without notice. Refer to the section on **Setting your own** for more details.
@@ -59,7 +63,13 @@ curl -XPOST http://apiad.net:6778 -d    \
 
 ## Python API
 
-If you talk Python, you can clone this project and use a set of simple tools to skip all that `curl`. `send` simply sends the message.
+If you talk Python, you can clone this project and use a set of simple tools to skip all that `curl`.
+
+```
+pip install logbot-telegram
+```
+
+* `send` simply sends the message.
 
 ```python
 >>> from logbot import Client
@@ -67,14 +77,14 @@ If you talk Python, you can clone this project and use a set of simple tools to 
 >>> c.send("Hello World")
 ```
 
-You can also use two more utility methods. `ask` will send the corresponding questions as buttons and return the reply:
+* `ask` will send the corresponding questions as buttons and return the reply:
 
 ```python
 >>> c.ask("Do you?", "A", "B", "C")
 'C' # Supposedly you hit C in Telegram
 ```
 
-`yes` will simply send `Yes` and `No` and return `True` or `False`:
+* `yes` will simply send `Yes` and `No` and return `True` or `False`:
 
 ```python
 >>> if c.yes("Do you?"):
@@ -98,8 +108,7 @@ For testing, and while my server handles it, you can use the bot I have set up. 
 
 * First, create your Telegram bot with [BotFather](t.me/botfather). If you don't know what I mean, read the Telegram documentation on bots. It's all over the Internet.
 * Second, BotFather will give you a `TOKEN`. Make sure to write it down.
-* Third, clone this repository.
-* Fourth, `pipenv install` the dependencies.
+* Third, `pip install logbot-telegram`.
 * Finally, `export TOKEN=<your-token>`.
 * You can run `pipenv run python -m logbot` now. It will listen by default at `localhost:6778`.
 * You can change the `HOST` and `PORT` with environment variables.
