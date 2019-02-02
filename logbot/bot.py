@@ -76,6 +76,6 @@ class Bot:
         self.chat_ids[msg_token] = update.message.chat_id
         update.message.reply_markdown("This is your custom message token:\n*{0}*".format(msg_token))
 
-    def run(self):
+    def run(self, host='localhost', port=6778):
         self.updater.start_polling()
-        self.app.run('localhost', 6778)
+        self.app.run(host, port)
