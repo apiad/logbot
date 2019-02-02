@@ -11,6 +11,7 @@ coveralls = "*"
 [packages]
 python-telegram-bot = "*"
 flask = "*"
+sanic = "*"
 
 [requires]
 python_version = "3.6"

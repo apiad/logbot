@@ -1,10 +1,21 @@
 import time
 import json
+import random
 
 from telegram.ext import Updater, CommandHandler
+from telegram import ParseMode
 from threading import Thread
 from queue import Queue
-from flask import Flask, jsonify, request
+from sanic import Sanic
+from sanic.response import json
+
+
+def random_key(size):
+    symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    symbols = symbols + symbols.lower()
+    symbols = symbols + "0123456789"
+
+    return "".join(random.sample(symbols, size))
 
 
 class Bot:
@@ -14,51 +25,43 @@ class Bot:
         self.dispatcher = self.updater.dispatcher
         self.bot = self.updater.bot
         self.queue = MessageQueue()
-        self.started = False
-        self.chat_id = None
+        self.chat_ids = dict()
 
         # register methods
         self.dispatcher.add_handler(CommandHandler('start', self._start))
 
     def _start(self, bot, update):
-        if self.started:
-            bot.send_message(update.message.chat_id, "Sorry, already talking to someone else.")
-            return
+        msg_token = random_key(12)
+        self.chat_ids[msg_token] = update.message.chat_id
 
-        self.started = True
-        self.queue.started = True
-        self.chat_id = update.message.chat_id
-
-        return bot.send_message(update.message.chat_id, "I'm ready to start.")
+        return update.message.reply_markdown("This is your custom message token:\n*{0}*".format(msg_token))
 
     def run(self):
         self.queue.start()
         self.updater.start_polling()
 
-        try:
-            while True:
-                msg = self.queue.get()
-                self.bot.send_message(self.chat_id, str(msg))
-
-        except KeyboardInterrupt:
-            return
+        while True:
+            msg = self.queue.get()
+            try:
+                token = msg['token']
+                msg = msg["msg"]
+                self.bot.send_message(self.chat_ids[token],  msg, parse_mode=ParseMode.MARKDOWN)
+            except KeyError as e:
+                print("! key error:", e)
+                pass
 
 
 class MessageQueue(Thread):
     def __init__(self):
         super().__init__(name="message-queue", daemon=True)
-        self.app = Flask("message-queue")
+        self.app = Sanic("message-queue")
         self.queue = Queue()
-        self.started = False
 
         @self.app.route("/", methods=['POST'])
-        def post():
-            if not self.started:
-                return "Not /start command given yet", 404
-
+        async def post(request):
             data = request.get_json(force=True)
             self.queue.put(data)
-            return jsonify(data)
+            return json(data)
 
     def get(self):
         return self.queue.get()
