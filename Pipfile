@@ -10,6 +10,7 @@ coveralls = "*"
 
 [packages]
 python-telegram-bot = "*"
+flask = "*"
 
 [requires]
 python_version = "3.6"
