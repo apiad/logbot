@@ -57,6 +57,33 @@ curl -XPOST http://apiad.net:6778 -d    \
 
 > **NOTE:** By default you have 60 seconds to answer before a response timeout is raised. This hard limit might be changed in future versions.
 
+## Python API
+
+If you talk Python, you can clone this project and use a set of simple tools to skip all that `curl`. `send` simply sends the message.
+
+```python
+>>> from logbot import Client
+>>> c = Client(token="<token>", host="http://apiad.net", port=6778)
+>>> c.send("Hello World")
+```
+
+You can also use two more utility methods. `ask` will send the corresponding questions as buttons and return the reply:
+
+```python
+>>> c.ask("Do you?", "A", "B", "C")
+'C' # Supposedly you hit C in Telegram
+```
+
+`yes` will simply send `Yes` and `No` and return `True` or `False`:
+
+```python
+>>> if c.yes("Do you?"):
+>>>     print("It does!")
+'It does!' # Supposedly you hit Yes in Telegram
+```
+
+These are also available as simple functions, which receive `token`, `host` and `port` on every call. The `Client` class just simplifies passing those values all the time.
+
 ## What can I do with this?
 
 Some simple ideas:
