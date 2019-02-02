@@ -10,7 +10,6 @@ coveralls = "*"
 
 [packages]
 python-telegram-bot = "*"
-flask = "*"
 sanic = "*"
 
 [requires]
