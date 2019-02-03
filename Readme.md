@@ -1,4 +1,4 @@
-# LogBot [![](https://img.shields.io/pypi/v/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/) [![](https://img.shields.io/pypi/pyversions/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/)
+# LogBot [![](https://img.shields.io/pypi/v/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/) [![](https://img.shields.io/pypi/pyversions/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/) [![](https://img.shields.io/badge/open%20in-telegram-red.svg?style=flat-square)](t.me/apiad_demo_logbot)
 
 > A Telegram bot that you can log to from bash or Python and manage long running processes.
 
