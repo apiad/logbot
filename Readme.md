@@ -122,12 +122,12 @@ Some simple ideas:
 
 For testing, and while my server handles it, you can use the bot I have set up. It's free and for that reason I might decide to turn it off at any given time without any advice. So, if you want a long time working solution, you will have to set up your own.
 
-* First, create your Telegram bot with [BotFather](t.me/botfather). If you don't know what I mean, read the Telegram documentation on bots. It's all over the Internet.
-* Second, BotFather will give you a `TOKEN`. Make sure to write it down.
-* Third, `pip install logbot-telegram`.
-* Finally, `export TOKEN=<your-token>`.
-* You can run `pipenv run python -m logbot` now. It will listen by default at `localhost:6778`.
-* You can change the `HOST` and `PORT` with environment variables.
+1. Create your Telegram bot with [BotFather](t.me/botfather). If you don't know what I mean, read the Telegram documentation on bots. It's all over the Internet.
+2. BotFather will give you a `TOKEN`. Make sure to write it down.
+3. Run `pip install logbot-telegram`.
+4. Run `export TOKEN=<your-token>`.
+5. You can run `python -m logbot` now. It will listen by default at `localhost:6778`.
+6. You can change the `HOST` and `PORT` with environment variables.
 
 ## Collaboration
 
