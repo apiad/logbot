@@ -1,7 +1,7 @@
 import setuptools
 
 long_description = """
-# LogBot
+# LogBot [![](https://img.shields.io/pypi/v/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/) [![](https://img.shields.io/pypi/pyversions/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/)
 
 A Telegram bot that you can log to from Python and manage long running processes.
 Check the [Readme](https://github.com/apiad/logbot) for use and installation instructions.

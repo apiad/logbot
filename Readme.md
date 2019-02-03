@@ -1,6 +1,6 @@
-# LogBot
+# LogBot [![](https://img.shields.io/pypi/v/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/) [![](https://img.shields.io/pypi/pyversions/logbot-telegram.svg?style=flat-square)](https://pypi.org/project/logbot-telegram/)
 
-> A Telegram bot that you can log to from Python and manage long running processes.
+> A Telegram bot that you can log to from bash or Python and manage long running processes.
 
 ```
 pip install logbot-telegram
