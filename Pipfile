@@ -12,6 +12,7 @@ twine = "*"
 [packages]
 python-telegram-bot = "*"
 sanic = "*"
+emoji = "*"
 
 [requires]
 python_version = "3.6"

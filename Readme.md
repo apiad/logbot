@@ -26,6 +26,7 @@ curl -XPOST http://apiad.net:6778 -d \
     \"token\": \"ytp96gWZ8uHE\",     \
     \"msg\": \"Hello World\"         \
 }"
+{"msg":"Hello World", "id":121}
 ```
 
 Voilá, your message will be forwared to Telegram:
@@ -40,6 +41,7 @@ curl -XPOST http://apiad.net:6778 -d \
     \"token\": \"ytp96gWZ8uHE\",     \
     \"msg\": \"*Hello* _World_\"     \
 }"
+{"msg":"*Hello* _World_", "id":122}
 ```
 
 ![](img/img4.png)
@@ -54,12 +56,16 @@ curl -XPOST http://apiad.net:6778 -d    \
     \"msg\": \"Wanna try?\",            \
     \"actions\": [\"Yes\", \"No way\"]  \
 }"
-{"msg":"Wanna try?","response":"Yes"}
+{"msg":"Wanna try?","response":"Yes", "id":123}
 ```
 
 ![](img/img5.png)
 
 > **NOTE:** By default you have 60 seconds to answer before a response timeout is raised. This hard limit might be changed in future versions.
+
+If you send a `progress` key with a value between `0` and `1` (`float`), the message will also render a progress bar.
+If you send an `edit` key with the value (`int`) of the `id` of a previous response, you will edit that message instead of sending a new one.
+You can use these two features together to create animated progress bars.
 
 ## Python API
 
@@ -90,6 +96,16 @@ pip install logbot-telegram
 >>> if c.yes("Do you?"):
 >>>     print("It does!")
 'It does!' # Supposedly you hit Yes in Telegram
+```
+
+The `send` method also receives an optional `progress` value to render a progress bar.
+Also, a parameter `edit=True` will make it edit the last send message, instead of a new one.
+With these options you can make an animated progress bar like:
+
+```python
+>>> for i in range(0, 11):
+...     c.send("Progress", progress=i/10, edit=True)
+...     time.sleep(1)
 ```
 
 These are also available as simple functions, which receive `token`, `host` and `port` on every call. The `Client` class just simplifies passing those values all the time.

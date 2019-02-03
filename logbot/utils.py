@@ -1,11 +1,15 @@
 import requests
 
 
-def send(token, msg, host="http://localhost", port=6778):
+def send(token, msg, edit=None, progress=None, host="http://localhost", port=6778):
     response = requests.post("%s:%d" % (host,port), json=dict(
         token=token,
-        msg=msg
+        msg=msg,
+        progress=progress,
+        edit=edit
     ))
+
+    return response.json()
 
 def ask(token, msg, *actions, host="http://localhost", port=6778):
     response = requests.post("%s:%d" % (host,port), json=dict(
@@ -28,9 +32,10 @@ class Client:
         self.token = token
         self.host = host
         self.port = port
+        self.last_id = None
 
-    def send(self, msg):
-        send(self.token, msg, self.host, self.port)
+    def send(self, msg, progress=None, edit=False):
+        self.last_id = send(self.token, msg, progress=progress, edit=self.last_id if edit else None, host=self.host, port=self.port)['id']
 
     def ask(self, msg, *actions):
         return ask(self.token, msg, *actions, host=self.host, port=self.port)

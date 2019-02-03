@@ -9,7 +9,7 @@ Check the [Readme](https://github.com/apiad/logbot) for use and installation ins
 
 setuptools.setup(
     name="logbot-telegram",
-    version="0.1.2",
+    version="0.1.3",
     author="Alejandro Piad",
     author_email="apiad@apiad.net",
     description="A Telegram bot that you can log to from Python and manage long running processes.",

@@ -3,6 +3,7 @@ import json
 import random
 import asyncio
 
+from emoji import emojize
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from threading import Thread
@@ -17,6 +18,10 @@ def random_key(size):
     symbols = symbols + "0123456789"
 
     return "".join(random.sample(symbols, size))
+
+
+BLACK = emojize(":black_medium_square:")
+WHITE = emojize(":white_medium_square:")
 
 
 class Bot:
@@ -46,6 +51,20 @@ class Bot:
         user = self.chat_ids[token]
         actions = data.get('actions', [])
         reply_token = random_key(12)
+        progress = data.get('progress', None)
+        edit = data.get('edit', None)
+
+        text = msg
+
+        if isinstance(progress, float) and 0 <= progress <= 1:
+            blacks = int(progress * 10)
+            whites = 10 - blacks
+            text += "\n"
+
+            for i in range(blacks):
+                text += BLACK
+            for i in range(whites):
+                text += WHITE
 
         if actions:
             reply_markup = InlineKeyboardMarkup([[
@@ -54,16 +73,20 @@ class Bot:
         else:
             reply_markup = None
 
-        message = self.bot.send_message(user, msg, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
+        if isinstance(edit, int):
+            message = self.bot.edit_message_text(text=text, chat_id=user, message_id=edit, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
+        else:
+            message = self.bot.send_message(text=text, chat_id=user, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
+
 
         if not actions:
-            return json(dict(msg=msg))
+            return json(dict(msg=msg, id=message.message_id))
 
         while not reply_token in self.callbacks:
             await asyncio.sleep(1)
 
         response = self.callbacks.pop(reply_token)
-        return json(dict(msg=msg, response=response))
+        return json(dict(msg=msg, response=response, id=message.message_id))
 
     def _callback(self, bot, update):
         token, response = update.callback_query.data.split("/")
