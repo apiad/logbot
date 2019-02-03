@@ -1,11 +1,15 @@
 import setuptools
 
-with open("Readme.md", "r") as fh:
-    long_description = fh.read()
+long_description = """
+# LogBot
+
+A Telegram bot that you can log to from Python and manage long running processes.
+Check the [Readme](https://github.com/apiad/logbot) for use and installation instructions.
+"""
 
 setuptools.setup(
     name="logbot-telegram",
-    version="0.1.0",
+    version="0.1.1",
     author="Alejandro Piad",
     author_email="apiad@apiad.net",
     description="A Telegram bot that you can log to from Python and manage long running processes.",
