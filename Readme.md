@@ -67,6 +67,18 @@ If you send a `progress` key with a value between `0` and `1` (`float`), the mes
 If you send an `edit` key with the value (`int`) of the `id` of a previous response, you will edit that message instead of sending a new one.
 You can use these two features together to create animated progress bars.
 
+```bash
+curl -XPOST http://apiad.net:6778 -d    \
+"{                                      \
+    \"token\": \"8PmUheSK6Zow\",        \
+    \"msg\": \"It works\",              \
+    \"progress\": 0.3                   \
+}"
+{"msg":"It works", "id":124}
+```
+
+![](img/img6.png)
+
 ## Python API
 
 If you talk Python, you can clone this project and use a set of simple tools to skip all that `curl`.
