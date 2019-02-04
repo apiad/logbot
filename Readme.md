@@ -23,7 +23,7 @@ Now with this secret token you can communicate to the bot through HTTP. The prot
 ```bash
 curl -XPOST http://apiad.net:6778 -d \
 "{                                   \
-    \"token\": \"ytp96gWZ8uHE\",     \
+    \"token\": \"8PmUheSK6Zow\",     \
     \"msg\": \"Hello World\"         \
 }"
 {"msg":"Hello World", "id":121}
@@ -38,7 +38,7 @@ You can send messages with Markdown formatting:
 ```bash
 curl -XPOST http://apiad.net:6778 -d \
 "{                                   \
-    \"token\": \"ytp96gWZ8uHE\",     \
+    \"token\": \"8PmUheSK6Zow\",     \
     \"msg\": \"*Hello* _World_\"     \
 }"
 {"msg":"*Hello* _World_", "id":122}
@@ -52,7 +52,7 @@ When you click the button, and **only when you click it**, you will get a respon
 ```bash
 curl -XPOST http://apiad.net:6778 -d    \
 "{                                      \
-    \"token\": \"ytp96gWZ8uHE\",        \
+    \"token\": \"8PmUheSK6Zow\",        \
     \"msg\": \"Wanna try?\",            \
     \"actions\": [\"Yes\", \"No way\"]  \
 }"
