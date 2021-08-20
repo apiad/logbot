@@ -39,6 +39,7 @@ class Bot:
         # register bot endpoints
         self.app = Sanic("message-queue")
         self.app.add_route(self._post, "/", methods=['POST'])
+        self.app.register_listener(self.stop, "before_server_stop")
 
         # callback ids
         self.callbacks = {}
@@ -102,3 +103,6 @@ class Bot:
     def run(self, host='localhost', port=6778):
         self.updater.start_polling()
         self.app.run(host, port)
+
+    def stop(self, app, loop):
+        self.updater.stop()
