@@ -19,7 +19,7 @@ setuptools.setup(
     packages=['logbot'],
     install_requires=[
         'python-telegram-bot==11.1.0',
-        'sanic==18.12.0',
+        'sanic==20.12.7',
         'emoji==0.5.1',
         'requests==2.21.0'
     ],
